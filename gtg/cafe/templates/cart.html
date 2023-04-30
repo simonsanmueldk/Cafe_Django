@@ -1,0 +1,25 @@
+<!-- templates/view_cart.html -->
+
+{% load custom_filters %}
+
+<h1>Cart</h1>
+
+<ul>
+{% for order in orders %}
+  <li>
+    <h3>{{ order.drink.name }}</h3>
+    <p>Quantity: {{ order.quantity }}</p>
+    <p>Price: ${{ order.drink.price }}</p>
+    <p>Subtotal: ${{ order.quantity|multiply:order.drink.price }}</p>
+  </li>
+{% empty %}
+  <li>Your cart is empty.</li>
+{% endfor %}
+</ul>
+
+<p>Total Price: ${{ total_price }}</p>
+
+<form method="post" action="{% url 'confirm_order' %}">
+  {% csrf_token %}
+  <input type="submit" value="Confirm Order">
+</form>

@@ -1,0 +1,22 @@
+<!-- templates/order_confirmation.html -->
+
+{% load custom_filters %}
+
+<h1>Order Confirmation</h1>
+
+<ul>
+  {% for order in orders %}
+    <li>
+      <h3>{{ order.drink.name }}</h3>
+      <p>Quantity: {{ order.quantity }}</p>
+      <p>Price: ${{ order.drink.price }}</p>
+      <p>Subtotal: ${{ order.quantity|multiply:order.drink.price }}</p>
+    </li>
+  {% empty %}
+    <li>No orders to confirm.</li>
+  {% endfor %}
+</ul>
+
+<p>Total Price: ${{ total_price }}</p>
+
+<p>Thank you for your order!</p>

@@ -1,0 +1,19 @@
+<!-- templates/drink_catalog.html -->
+
+<h1>Drink Catalog</h1>
+
+<ul>
+{% for drink in drinks %}
+  <li>
+    <h3>{{ drink.name }}</h3>
+    <p>{{ drink.description }}</p>
+    <p>Price: ${{ drink.price }}</p>
+    <form method="post" action="{% url 'add_to_cart' drink.id %}">
+      {% csrf_token %}
+      <input type="submit" value="Add to Cart">
+    </form>
+  </li>
+{% empty %}
+  <li>No drinks available.</li>
+{% endfor %}
+</ul>
