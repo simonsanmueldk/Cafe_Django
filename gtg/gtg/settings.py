@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cafe',
     'cafe.templatetags',
+    'bootstrap4',
 ]
 
 

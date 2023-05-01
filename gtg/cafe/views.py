@@ -17,13 +17,14 @@ def add_to_cart(request, drink_id):
     return redirect('drink_catalog')
 
 def cart(request):
-    orders = Order.objects.filter(user=request.user, status='pending')
+    orders = Order.objects.filter(user=request.user, status__in=['pending', 'cart'])
     total_price = sum(order.quantity * order.drink.price for order in orders)
     context = {
         'orders': orders,
         'total_price': total_price
     }
     return render(request, 'cart.html', context)
+
 
 
 def order_confirmation(request):
